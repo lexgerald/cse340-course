@@ -1,12 +1,15 @@
 <%- include('partials/header') %>
 <main>
     <h1><%= title %></h1>
-    <p>Browse organizations by category:</p>
-    <ul class="category-list">
-        <li><strong>Environmental</strong></li>
-        <li><strong>Educational</strong></li>
-        <li><strong>Community Service</strong></li>
-        <li><strong>Health and Wellness</strong></li>
-    </ul>
+    <h3>Browse organizations by category</h3>
+    <% if (categories && categories.length > 0) { %>
+        <ul class="category-list">
+            <% categories.forEach(category => { %>
+                <li><%= category.name %></li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>No categories found.</p>
+    <% } %>
 </main>
 <%- include('partials/footer') %>

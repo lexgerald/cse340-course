@@ -29,9 +29,9 @@ CREATE TABLE service_project (
     location VARCHAR(255) NOT NULL,
     project_date DATE NOT NULL,
     CONSTRAINT fk_service_project_organization
-        FOREIGN KEY (organization_id)
-        REFERENCES organization (organization_id)
-        ON DELETE CASCADE
+    FOREIGN KEY (organization_id)
+    REFERENCES organization (organization_id)
+    ON DELETE CASCADE
 );
 
 -- ========================================
@@ -45,3 +45,21 @@ VALUES
 (2, 'School Garden Installation', 'Install raised garden beds at an elementary school and run a planting day with students.', 'Lincoln Elementary School', '2025-08-22'),
 (3, 'Food Drive Sorting Event', 'Sort and package donated food items for distribution to local food banks.', 'UnityServe Warehouse', '2025-04-12'),
 (3, 'Park Cleanup Day', 'Clean up litter and plant native shrubs along the riverside park trail.', 'Riverside Park', '2025-09-13');
+
+-- ========================================
+-- Category Table
+-- ========================================
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- ========================================
+-- Inserting data: Categories
+-- ========================================
+INSERT INTO category (name)
+VALUES
+('Environment & Sustainability'),
+('Community Development'),
+('Education & Youth'),
+('Food Security & Hunger Relief');
