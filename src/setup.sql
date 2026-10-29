@@ -59,7 +59,7 @@ VALUES
  'Build shelving and set up a shared tool-lending library for community members.',
  'Riverside Community Center', '2025-09-20'),
 
--- Organization 2: Green Roots Collective
+-- Organization 2:
 (2, 'Urban Garden Workshop',
  'Teach residents how to grow vegetables in small urban spaces and distribute starter kits.',
  'Downtown Community Garden', '2025-05-20'),
@@ -80,7 +80,7 @@ VALUES
  'Organize a community seed swap and sell low-cost vegetable starters to local gardeners.',
  'Downtown Farmers Market', '2025-03-15'),
 
--- Organization 3: UnityServe Alliance
+-- Organization 3:
 (3, 'Food Drive Sorting Event',
  'Sort and package donated food items for distribution to local food banks.',
  'UnityServe Warehouse', '2025-04-12'),
