@@ -118,3 +118,24 @@ VALUES
 ('Community Development'),
 ('Education & Youth'),
 ('Food Security & Hunger Relief');
+
+-- ============================================================
+-- PROJECT_CATEGORY (junction table — many-to-many)
+-- ============================================================
+CREATE TABLE project_category (
+    project_id INT NOT NULL,
+    category_id INT NOT NULL,
+    PRIMARY KEY (project_id, category_id),
+    CONSTRAINT fk_project
+        FOREIGN KEY (project_id)
+        REFERENCES service_project (project_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_category
+        FOREIGN KEY (category_id)
+        REFERENCES category (category_id)
+        ON DELETE CASCADE
+);
+
+INSERT INTO project_category (project_id, category_id) VALUES
+(53, 2),(54, 2), (55, 3),          
+(53, 3);

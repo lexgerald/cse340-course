@@ -1,14 +1,21 @@
 <%- include('partials/header') %>
 <main>
     <h1><%= title %></h1>
-    <h3>Upcoming Service Projects</h3>
-    <ul>
-        <% serviceProjects.forEach((project) => { %>
-            <li>
-                <%= project.project_date.toISOString().split('T')[0] %>:
-                <%= project.title %> (<%= project.organization_id %>)
-            </li>
-        <% }) %>
-    </ul>
+
+    <% if (typeof projects === 'undefined') { %>
+        <p style="color:red">DEBUG: "projects" not passed to view.</p>
+    <% } else if (projects.length === 0) { %>
+        <p style="color:orange">DEBUG: projects is [] — the array is empty.</p>
+    <% } else { %>
+        <ul>
+            <% projects.forEach((project) => { %>
+                <li>
+                    <%= new Date(project.date).toISOString().split('T')[0] %>:
+                    <a href="/project/<%= project.project_id %>"><%= project.title %></a>
+                    (<a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a>)
+                </li>
+            <% }) %>
+        </ul>
+    <% } %>
 </main>
 <%- include('partials/footer') %>
