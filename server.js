@@ -3,8 +3,8 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
-import { getAllCategories } from './src/models/categories.js';
 import { showProjectsPage, showProjectDetailsPage } from './src/controllers/projects.js';
+import { showCategoriesPage, showCategoryDetailsPage } from './src/controllers/categories.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 const PORT = process.env.PORT || 3000;
@@ -19,33 +19,28 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
 
 // Home
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
     res.render('home', { title: 'Home' });
 });
 
 // Organizations
-app.get('/organizations', async (req, res) => {
-    const organizations = await getAllOrganizations();
-    res.render('organizations', {
-        title: 'Our Partner Organizations',
-        organizations
-    });
+app.get('/organizations', async (req, res, next) => {
+    try {
+        const organizations = await getAllOrganizations();
+        res.render('organizations', {
+            title: 'Our Partner Organizations',
+            organizations
+        });
+    } catch (error) { next(error); }
 });
 
-// Projects (upcoming list) — uses controller
+// Projects
 app.get('/projects', showProjectsPage);
-
-// Project (single details page) — uses controller
 app.get('/project/:id', showProjectDetailsPage);
 
 // Categories
-app.get('/categories', async (req, res) => {
-    const categories = await getAllCategories();
-    res.render('categories', {
-        title: 'Service Categories',
-        categories
-    });
-});
+app.get('/categories', showCategoriesPage);
+app.get('/category/:id', showCategoryDetailsPage);  
 
 app.listen(PORT, async () => {
   try {
