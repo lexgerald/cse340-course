@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+<main class="organization-form-page">
+    <section class="organization-form-card">
+        <header class="form-card-header">
+            <h1><%= title %></h1>
+            <p class="form-intro">Add a new category for grouping service projects.</p>
+        </header>
+
+        <form action="/new-category" method="POST" class="organization-form">
+            <div class="form-group">
+                <label for="name">Category Name <span class="required">*</span></label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    maxlength="100"
+                    required
+                    placeholder="e.g., Environment & Sustainability"
+                />
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Create Category</button>
+                <a href="/categories" class="btn btn-ghost">Cancel</a>
+            </div>
+        </form>
+    </section>
+</main>
+<%- include('partials/footer') %>

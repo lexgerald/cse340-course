@@ -1,17 +1,11 @@
 import db from './db.js';
 
-// (existing) get all categories
 const getAllCategories = async () => {
-    const query = `
-        SELECT category_id, name
-        FROM category
-        ORDER BY name;
-    `;
+    const query = `SELECT category_id, name FROM category ORDER BY name;`;
     const result = await db.query(query);
     return result.rows;
 };
 
-// NEW: retrieve a single category by its ID
 const getCategoryDetails = async (categoryId) => {
     const query = `
         SELECT category_id, name
@@ -22,7 +16,7 @@ const getCategoryDetails = async (categoryId) => {
     return result.rows.length > 0 ? result.rows[0] : null;
 };
 
-// NEW: retrieve all categories for a given service project
+// existing — categories of a given project
 const getCategoriesForProject = async (projectId) => {
     const query = `
         SELECT c.category_id, c.name
@@ -35,7 +29,7 @@ const getCategoriesForProject = async (projectId) => {
     return result.rows;
 };
 
-// NEW: retrieve all service projects for a given category
+// existing — projects of a given category
 const getProjectsForCategory = async (categoryId) => {
     const query = `
         SELECT sp.project_id, sp.title, sp.description,
@@ -51,9 +45,66 @@ const getProjectsForCategory = async (categoryId) => {
     return result.rows;
 };
 
+// NEW — insert one assignment (project × category)
+const assignCategoryToProject = async (categoryId, projectId) => {
+    const query = `
+        INSERT INTO project_category (category_id, project_id)
+        VALUES ($1, $2)
+        ON CONFLICT DO NOTHING;
+    `;
+    await db.query(query, [categoryId, projectId]);
+};
+
+// NEW — replace all assignments for a project
+const updateCategoryAssignments = async (projectId, categoryIds) => {
+    const deleteQuery = `
+        DELETE FROM project_category
+        WHERE project_id = $1;
+    `;
+    await db.query(deleteQuery, [projectId]);
+
+    for (const categoryId of categoryIds) {
+        await assignCategoryToProject(categoryId, projectId);
+    }
+};
+
+const createCategory = async (name) => {
+    const query = `
+        INSERT INTO category (name)
+        VALUES ($1)
+        RETURNING category_id;
+    `;
+    const result = await db.query(query, [name]);
+
+    if (result.rows.length === 0) {
+        throw new Error('Failed to create category');
+    }
+
+    return result.rows[0].category_id;
+};
+
+const updateCategory = async (categoryId, name) => {
+    const query = `
+        UPDATE category
+        SET name = $1
+        WHERE category_id = $2
+        RETURNING category_id;
+    `;
+    const result = await db.query(query, [name, categoryId]);
+
+    if (result.rows.length === 0) {
+        throw new Error('Category not found');
+    }
+
+    return result.rows[0].category_id;
+};
+
 export {
     getAllCategories,
     getCategoryDetails,
     getCategoriesForProject,
-    getProjectsForCategory
+    getProjectsForCategory,
+    updateCategoryAssignments,
+    createCategory,
+    updateCategory
 };

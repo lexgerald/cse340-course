@@ -1,7 +1,11 @@
 <%- include('partials/header') %>
 <main>
+    <p>
+        <a href="/projects" class="btn btn-ghost">← Back to Projects</a>
+        <a href="/assign-categories/<%= project.project_id %>" class="btn btn-ghost">Edit Categories</a>
+        <a href="/edit-project/<%= project.project_id %>" class="btn btn-ghost">Edit Project</a>
+    </p>
     <h1><%= project.title %></h1>
-
     <p><%= project.description %></p>
 
     <p><strong>Date:</strong> <%= new Date(project.date).toISOString().split('T')[0] %></p>
@@ -25,6 +29,5 @@
         </p>
     <% } %>
 
-    <p><a href="/projects">← Back to Projects</a></p>
 </main>
 <%- include('partials/footer') %>

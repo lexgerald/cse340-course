@@ -1,0 +1,72 @@
+<%- include('partials/header') %>
+<main class="organization-form-page">
+    <section class="organization-form-card">
+        <header class="form-card-header">
+            <h1><%= title %></h1>
+            <p class="form-intro">
+                Update the details below. Changes take effect immediately after saving.
+            </p>
+        </header>
+
+        <form action="/edit-organization/<%= organizationDetails.organization_id %>" method="POST" class="organization-form">
+            <div class="form-group">
+                <label for="name">Organization Name <span class="required">*</span></label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="<%= organizationDetails.name %>"
+                    maxlength="150"
+                    placeholder="e.g., Riverside Community Builders"
+                    required
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description <span class="required">*</span></label>
+                <textarea
+                    id="description"
+                    name="description"
+                    maxlength="500"
+                    placeholder="What does this organization do?"
+                    required
+                ><%= organizationDetails.description %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="contactEmail">Contact Email <span class="required">*</span></label>
+                <input
+                    type="email"
+                    id="contactEmail"
+                    name="contactEmail"
+                    value="<%= organizationDetails.contact_email %>"
+                    maxlength="255"
+                    placeholder="contact@example.org"
+                    required
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="logoFilename">Logo Filename <span class="required">*</span></label>
+                <input
+                    type="text"
+                    id="logoFilename"
+                    name="logoFilename"
+                    value="<%= organizationDetails.logo_filename %>"
+                    maxlength="255"
+                    placeholder="placeholder-logo.png"
+                    required
+                />
+                <small class="form-hint">
+                    Currently: <code><%= organizationDetails.logo_filename %></code>
+                </small>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Update Organization</button>
+                <a href="/organization/<%= organizationDetails.organization_id %>" class="btn btn-ghost">Cancel</a>
+            </div>
+        </form>
+    </section>
+</main>
+<%- include('partials/footer') %>

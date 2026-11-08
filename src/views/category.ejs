@@ -18,6 +18,9 @@
         </ul>
     <% } %>
 
-    <p><a href="/categories">← Back to Categories</a></p>
+    <p>
+        <a href="/categories" class="btn btn-ghost">← Back to Categories</a>
+        <a href="/edit-category/<%= category.category_id %>" class="btn btn-ghost">Edit Category</a>
+    </p>
 </main>
 <%- include('partials/footer') %>

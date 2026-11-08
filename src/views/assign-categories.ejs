@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+<main class="assign-categories-page">
+    <section class="assign-categories-card">
+        <header class="form-card-header">
+            <h1><%= projectDetails.title %></h1>
+            <p class="form-intro">Choose the categories this project belongs to.</p>
+        </header>
+
+        <form action="/assign-categories/<%= projectId %>" method="POST" class="assign-categories-form">
+            <div class="checkbox-grid">
+                <% categories.forEach(category => { %>
+                    <% const isChecked = assignedCategories.some(ac => ac.category_id === category.category_id); %>
+                    <label class="checkbox-item" for="category-<%= category.category_id %>">
+                        <input
+                            type="checkbox"
+                            id="category-<%= category.category_id %>"
+                            name="categoryIds"
+                            value="<%= category.category_id %>"
+                            <%= isChecked ? 'checked' : '' %>
+                        />
+                        <span><%= category.name %></span>
+                    </label>
+                <% }); %>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Update Categories</button>
+                <a href="/project/<%= projectId %>" class="btn btn-ghost">Cancel</a>
+            </div>
+        </form>
+    </section>
+</main>
+<%- include('partials/footer') %>
