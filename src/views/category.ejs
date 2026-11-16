@@ -20,7 +20,9 @@
 
     <p>
         <a href="/categories" class="btn btn-ghost">← Back to Categories</a>
+        <% if (user && user.role_name === 'admin') { %>
         <a href="/edit-category/<%= category.category_id %>" class="btn btn-ghost">Edit Category</a>
+        <% } %>
     </p>
 </main>
 <%- include('partials/footer') %>

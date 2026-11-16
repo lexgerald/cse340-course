@@ -2,7 +2,11 @@
 <main>
     <h1><%= title %></h1>
     <h3>Here are a few of our partner organizations:</h3>
-    <p><a href="/new-organization" class="btn btn-ghost">Add new organization</a></p>
+    <p>
+        <% if (user && user.role_name === 'admin') { %>
+            <a href="/new-organization" class="btn btn-ghost">Add New Organization</a>
+        <% } %>
+    </p>
 
     <ul>
         <% organizations.forEach(organization => { %>

@@ -2,7 +2,9 @@
 <main>
     <p>
         <a href="/organizations" class="btn btn-ghost">← Back to Organizations</a>
+        <% if (user && user.role_name === 'admin') { %>
         <a href="/edit-organization/<%= organization.organization_id %>" class="btn btn-ghost">Edit Organization</a>
+        <% } %>
     </p>
     
     <h1><%= organization.name %></h1>
