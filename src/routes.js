@@ -1,5 +1,11 @@
 import express from 'express';
-import {showUserRegistrationForm, processUserRegistrationForm } from './controllers/users.js'
+import {
+    showUserRegistrationForm, 
+    processUserRegistrationForm,
+    showLoginForm,
+    processLoginForm,
+    processLogout
+} from './controllers/users.js'
 
 // Organizations
 import {
@@ -48,6 +54,11 @@ router.get('/', (req, res) => {
 // User registration routes
 router.get('/register', showUserRegistrationForm);
 router.post('/register', processUserRegistrationForm);
+
+// User login routes
+router.get('/login', showLoginForm);
+router.post('/login', processLoginForm);
+router.get('/logout', processLogout);
 
 // ============================================================
 // ORGANIZATIONS
