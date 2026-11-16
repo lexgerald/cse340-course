@@ -4,7 +4,9 @@ import {
     processUserRegistrationForm,
     showLoginForm,
     processLoginForm,
-    processLogout
+    processLogout,
+    requireLogin,
+    showDashboard
 } from './controllers/users.js'
 
 // Organizations
@@ -59,6 +61,9 @@ router.post('/register', processUserRegistrationForm);
 router.get('/login', showLoginForm);
 router.post('/login', processLoginForm);
 router.get('/logout', processLogout);
+
+// Dashboard (protected)
+router.get('/dashboard', requireLogin, showDashboard);
 
 // ============================================================
 // ORGANIZATIONS
