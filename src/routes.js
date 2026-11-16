@@ -1,4 +1,5 @@
 import express from 'express';
+import {showUserRegistrationForm, processUserRegistrationForm } from './controllers/users.js'
 
 // Organizations
 import {
@@ -43,6 +44,10 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.render('home', { title: 'Home' });
 });
+
+// User registration routes
+router.get('/register', showUserRegistrationForm);
+router.post('/register', processUserRegistrationForm);
 
 // ============================================================
 // ORGANIZATIONS
