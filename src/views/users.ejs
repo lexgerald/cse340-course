@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+
+<main class="users-page">
+    <section class="users-card">
+        <header class="users-header">
+            <h1><%= title %></h1>
+            <p class="users-intro">All registered users in the system.</p>
+        </header>
+
+        <% if (typeof users === 'undefined' || users.length === 0) { %>
+            <p>No users found.</p>
+        <% } else { %>
+            <div class="users-table-wrapper">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach(user => { %>
+                            <tr>
+                                <td><%= user.name %></td>
+                                <td><%= user.email %></td>
+                                <td>
+                                    <span class="role-badge role-<%= user.role_name %>">
+                                        <%= user.role_name %>
+                                    </span>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } %>
+
+        <p class="users-back">
+            <a href="/dashboard" class="btn btn-ghost">← Back to Dashboard</a>
+        </p>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

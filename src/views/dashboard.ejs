@@ -16,7 +16,13 @@
                 <span class="info-label">Email</span>
                 <span class="info-value"><%= email %></span>
             </div>
-        </div>
+        </div><br>
+
+        <% if (roleName === 'admin') { %>
+            <div class="dashboard-actions">
+                <a href="/users" class="btn btn-primary">View All Users</a>
+            </div>
+        <% } %>
     </section>
 </main>
 
