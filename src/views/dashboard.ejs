@@ -23,6 +23,37 @@
                 <a href="/users" class="btn btn-primary">View All Users</a>
             </div>
         <% } %>
+
+        <section class="dashboard-volunteer-section">
+            <h2>My Volunteer Projects</h2>
+
+            <% if (typeof volunteeredProjects === 'undefined' || volunteeredProjects.length === 0) { %>
+                <p class="dashboard-empty">
+                    You haven't signed up to volunteer for any projects yet.
+                    <a href="/projects">Browse upcoming projects →</a>
+                </p>
+            <% } else { %>
+                <ul class="volunteer-list">
+                    <% volunteeredProjects.forEach(project => { %>
+                        <li class="volunteer-item">
+                            <div class="volunteer-info">
+                                <a href="/project/<%= project.project_id %>" class="volunteer-title">
+                                    <%= project.title %>
+                                </a>
+                                <span class="volunteer-meta">
+                                    <%= new Date(project.date).toISOString().split('T')[0] %>
+                                    · <%= project.location %>
+                                    · <%= project.organization_name %>
+                                </span>
+                            </div>
+                            <form action="/project/<%= project.project_id %>/unvolunteer" method="POST" class="volunteer-remove-form">
+                                <button type="submit" class="btn btn-ghost btn-sm">Remove</button>
+                            </form>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </section>
     </section>
 </main>
 

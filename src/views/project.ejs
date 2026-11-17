@@ -33,5 +33,24 @@
         </p>
     <% } %>
 
+    <%# Volunteer section — only shown to logged-in users %>
+    <% if (isLoggedIn) { %>
+        <section class="volunteer-section">
+            <% if (userIsVolunteering) { %>
+                <p class="volunteer-status volunteer-active">
+                    ✅ You are volunteering for this project.
+                </p>
+                <form action="/project/<%= project.project_id %>/unvolunteer" method="POST" class="volunteer-form">
+                    <button type="submit" class="btn btn-ghost">Remove me as a volunteer</button>
+                </form>
+            <% } else { %>
+                <p class="volunteer-status">Interested in helping out?</p>
+                <form action="/project/<%= project.project_id %>/volunteer" method="POST" class="volunteer-form">
+                    <button type="submit" class="btn btn-primary">Volunteer for this project</button>
+                </form>
+            <% } %>
+        </section>
+    <% } %>
+
 </main>
 <%- include('partials/footer') %>

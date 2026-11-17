@@ -2,8 +2,9 @@ import {
     getUpcomingProjects, 
     getProjectDetails,
     createProject,
-    updateProject 
+    updateProject, 
 } from '../models/projects.js';
+import { isVolunteering } from '../models/volunteers.js'
 import { getCategoriesForProject } from '../models/categories.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { body, validationResult } from 'express-validator';
@@ -51,13 +52,19 @@ const showProjectDetailsPage = async (req, res, next) => {
             return res.status(404).render('404', { title: 'Project Not Found' });
         }
 
-        // fetch categories for this project
         const categories = await getCategoriesForProject(id);
+
+        // Determine volunteer status only if a user is logged in
+        let userIsVolunteering = false;
+        if (req.session && req.session.user) {
+            userIsVolunteering = await isVolunteering(req.session.user.user_id, id);
+        }
 
         res.render('project', {
             title: project.title,
             project,
-            categories      // ← pass to the view
+            categories,
+            userIsVolunteering
         });
     } catch (error) {
         next(error);

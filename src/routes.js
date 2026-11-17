@@ -1,5 +1,9 @@
 import express from 'express';
 import {
+    processVolunteerForProject,
+    processRemoveVolunteerForProject
+} from './controllers/volunteers.js';
+import {
     showUserRegistrationForm, 
     processUserRegistrationForm,
     showLoginForm,
@@ -54,6 +58,10 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.render('home', { title: 'Home' });
 });
+
+// Volunteer routes (protected)
+router.post('/project/:projectId/volunteer', requireLogin, processVolunteerForProject);
+router.post('/project/:projectId/unvolunteer', requireLogin, processRemoveVolunteerForProject);
 
 // User registration routes
 router.get('/register', showUserRegistrationForm);

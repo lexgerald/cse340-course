@@ -1375,3 +1375,148 @@ footer p { margin: 0; }
         font-size: 0.88rem;
     }
 }
+
+/* ============================================================
+   Volunteer section — project details
+   ============================================================ */
+
+.volunteer-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+.volunteer-status {
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+    color: #334155;
+    font-weight: 500;
+}
+
+.volunteer-status.volunteer-active {
+    color: #065f46;
+    font-weight: 600;
+}
+
+.volunteer-form {
+    margin: 0;
+}
+
+.volunteer-form .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.92rem;
+}
+
+/* ============================================================
+   Volunteer list — dashboard
+   ============================================================ */
+
+.dashboard-volunteer-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.dashboard-volunteer-section h2 {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+}
+
+.dashboard-empty {
+    margin: 0;
+    padding: 1rem;
+    color: #64748b;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.dashboard-empty a {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dashboard-empty a:hover {
+    text-decoration: underline;
+}
+
+.volunteer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.volunteer-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.15rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.volunteer-item:hover {
+    border-color: #94a3b8;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
+}
+
+.volunteer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.volunteer-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    word-break: break-word;
+}
+
+.volunteer-title:hover {
+    text-decoration: underline;
+}
+
+.volunteer-meta {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+.volunteer-remove-form {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.btn-sm {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+    .volunteer-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .volunteer-remove-form {
+        align-self: flex-end;
+    }
+}
